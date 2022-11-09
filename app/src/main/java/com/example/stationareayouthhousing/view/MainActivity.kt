@@ -1,5 +1,8 @@
 package com.example.stationareayouthhousing.view
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -37,8 +40,7 @@ class MainActivity : AppCompatActivity() {
                         }
 
                         composable(RoutName.PLAN) {
-                            mainActivityViewModel.crawlingPlan()
-                            mainActivityViewModel.getAllPlan()
+                            mainActivityViewModel.createAndReadPlan(isNetworkConnected())
                             PlanScreen(navController = navController, innerPadding = innerPadding, planListLiveData = mainActivityViewModel.planListLiveData)
                         }
 
@@ -53,5 +55,11 @@ class MainActivity : AppCompatActivity() {
                 }
             )
         }
+    }
+
+    private fun isNetworkConnected(): Boolean {
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val caps = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork) ?: return false
+        return caps.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
     }
 }
