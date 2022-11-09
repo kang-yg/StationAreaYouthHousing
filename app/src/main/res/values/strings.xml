@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">StationAreaYouthHousing</string>
+
+    <string name="go_plan_screen">Go to Plan</string>
+    <string name="go_notice_screen">Go to notice</string>
+    <string name="go_supportPolicy_screen">Go to support policy</string>
+
+    <string name="schedule">입주자 모집공고(예정일)</string>
+    <string name="schedule_public">공공</string>
+    <string name="schedule_private">민간</string>
+    <string name="schedule_move_in">입주(예정일)</string>
+
+    <string name="address">%s %s %s</string>
 </resources>

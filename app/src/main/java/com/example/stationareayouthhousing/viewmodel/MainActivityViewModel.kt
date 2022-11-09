@@ -1,5 +1,7 @@
 package com.example.stationareayouthhousing.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stationareayouthhousing.model.Repository
@@ -15,6 +17,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+    private val _planListMutableLiveData = MutableLiveData<List<Plan>>()
+    val planListLiveData: LiveData<List<Plan>>
+        get() = _planListMutableLiveData
+
     fun crawlingPlan() {
         viewModelScope.launch {
             CoroutineScope(Dispatchers.IO).launch {
@@ -34,6 +40,14 @@ class MainActivityViewModel @Inject constructor(private val repository: Reposito
                     val tempPlan = Plan(year, serialNumber, address, station, supply, publicDueDate, privateDueDate, expectedMoveInDate)
                     repository.insertPlan(tempPlan)
                 }
+            }
+        }
+    }
+
+    fun getAllPlan() {
+        viewModelScope.launch {
+            CoroutineScope(Dispatchers.IO).launch {
+                _planListMutableLiveData.postValue(repository.getAllPlan())
             }
         }
     }

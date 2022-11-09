@@ -13,7 +13,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.stationareayouthhousing.RoutCompose
 import com.example.stationareayouthhousing.RoutName
 import com.example.stationareayouthhousing.viewmodel.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,24 +33,21 @@ class MainActivity : AppCompatActivity() {
                 content = { innerPadding ->
                     NavHost(navController = navController, RoutName.HOME) {
                         composable(RoutName.HOME) {
-                            RoutCompose().getScreen(routName = RoutName.HOME, navHostController = navController, innerPadding = innerPadding)
+                            HomeScreen(navController = navController, innerPadding = innerPadding)
                         }
 
                         composable(RoutName.PLAN) {
-                            RoutCompose().getScreen(routName = RoutName.PLAN, navHostController = navController, innerPadding = innerPadding)
                             mainActivityViewModel.crawlingPlan()
+                            mainActivityViewModel.getAllPlan()
+                            PlanScreen(navController = navController, innerPadding = innerPadding, planListLiveData = mainActivityViewModel.planListLiveData)
                         }
 
                         composable(RoutName.NOTICE) {
-                            RoutCompose().getScreen(routName = RoutName.NOTICE, navHostController = navController, innerPadding = innerPadding)
+                            NoticeScreen(navController = navController, innerPadding = innerPadding)
                         }
 
                         composable(RoutName.SUPPORT_POLICY) {
-                            RoutCompose().getScreen(
-                                routName = RoutName.SUPPORT_POLICY,
-                                navHostController = navController,
-                                innerPadding = innerPadding
-                            )
+                            SupportPolicyScreen(navController = navController, innerPadding = innerPadding)
                         }
                     }
                 }

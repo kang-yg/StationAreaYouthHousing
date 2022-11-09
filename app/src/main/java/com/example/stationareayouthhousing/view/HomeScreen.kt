@@ -7,8 +7,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.stationareayouthhousing.R
 import com.example.stationareayouthhousing.RoutName
 
 @Composable
@@ -32,17 +34,17 @@ fun HomeScreen(navController: NavController, innerPadding: PaddingValues) {
                 shape = RoundedCornerShape(0.dp),
                 onClick = { navController.navigate(RoutName.PLAN) }
             ) {
-                Text(text = "Go to Plan")
+                Text(text = stringResource(id = R.string.go_plan_screen))
             }
             Button(modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(0.dp),
                 onClick = { navController.navigate(RoutName.NOTICE) }) {
-                Text(text = "Go to notice")
+                Text(text = stringResource(id = R.string.go_notice_screen))
             }
             Button(modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(0.dp),
                 onClick = { navController.navigate(RoutName.SUPPORT_POLICY) }) {
-                Text(text = "Go to support policy")
+                Text(text = stringResource(id = R.string.go_supportPolicy_screen))
             }
         }
     }
