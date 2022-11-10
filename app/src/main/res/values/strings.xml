@@ -11,4 +11,5 @@
     <string name="schedule_move_in">입주(예정일)</string>
 
     <string name="address">%s %s %s</string>
+    <string name="plan_filter">Filter: </string>
 </resources>

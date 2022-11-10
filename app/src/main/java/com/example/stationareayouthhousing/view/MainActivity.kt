@@ -41,7 +41,11 @@ class MainActivity : AppCompatActivity() {
 
                         composable(RoutName.PLAN) {
                             mainActivityViewModel.createAndReadPlan(isNetworkConnected())
-                            PlanScreen(navController = navController, innerPadding = innerPadding, planListLiveData = mainActivityViewModel.planListLiveData)
+                            PlanScreen(
+                                navController = navController,
+                                innerPadding = innerPadding,
+                                planListLiveData = mainActivityViewModel.planListLiveData
+                            )
                         }
 
                         composable(RoutName.NOTICE) {
