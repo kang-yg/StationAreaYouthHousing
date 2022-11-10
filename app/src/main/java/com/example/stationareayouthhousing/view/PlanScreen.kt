@@ -35,8 +35,8 @@ fun PlanScreen(navController: NavController, innerPadding: PaddingValues, planLi
                     // TODO Show empty screen
                 } else {
                     Row {
-                        var selectYear = ""
-                        var selectBorough = ""
+                        var selectYear by rememberSaveable { mutableStateOf("") }
+                        var selectBorough by rememberSaveable { mutableStateOf("") }
                         Text(text = stringResource(id = R.string.plan_filter))
                         Box(modifier = Modifier.padding(0.dp, 0.dp, 4.dp, 0.dp))
                         DropdownFilter(getSpinnerYear(it)) { year ->
