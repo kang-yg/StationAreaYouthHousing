@@ -13,4 +13,5 @@
     <string name="address">%s %s %s</string>
     <string name="plan_filter">Filter: </string>
     <string name="plan_detail">Plan Detail</string>
+    <string name="plan_search">검색</string>
 </resources>

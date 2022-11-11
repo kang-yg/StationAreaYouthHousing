@@ -17,14 +17,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
 import androidx.navigation.compose.rememberNavController
+import com.google.gson.GsonBuilder
 import com.kyg.stationareayouthhousing.RoutName
 import com.kyg.stationareayouthhousing.model.dto.Plan
 import com.kyg.stationareayouthhousing.viewmodel.MainActivityViewModel
-import com.google.gson.GsonBuilder
+import com.naver.maps.map.compose.ExperimentalNaverMapApi
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 @ExperimentalMaterial3Api
+@ExperimentalNaverMapApi
 class MainActivity : AppCompatActivity() {
     private val mainActivityViewModel: MainActivityViewModel by viewModels()
     lateinit var navController: NavHostController
