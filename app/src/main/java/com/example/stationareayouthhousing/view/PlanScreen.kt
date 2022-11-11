@@ -21,7 +21,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.example.stationareayouthhousing.R
+import com.example.stationareayouthhousing.RoutName
 import com.example.stationareayouthhousing.model.dto.Plan
+import com.google.gson.Gson
 
 @Composable
 fun PlanScreen(navController: NavController, innerPadding: PaddingValues, planListLiveData: LiveData<List<Plan>>) {
@@ -49,7 +51,10 @@ fun PlanScreen(navController: NavController, innerPadding: PaddingValues, planLi
                             planListForFilter = filterPlan(it, if (selectYear != "ALL") selectYear else "", if (selectBorough != "ALL") selectBorough else "")
                         }
                     }
-                    if (planListForFilter == null) PlanLazyColumn(planList = it) else PlanLazyColumn(planList = planListForFilter!!)
+                    if (planListForFilter == null)
+                        PlanLazyColumn(planList = it, onClick = { plan -> planItemClickEvent(navController, plan) })
+                    else
+                        PlanLazyColumn(planList = planListForFilter!!, onClick = { plan -> planItemClickEvent(navController, plan) })
                 }
             }
         }
@@ -84,10 +89,11 @@ fun DropdownFilter(items: List<String>, selectItem: (String) -> Unit) {
 }
 
 @Composable
-fun PlanItem(plan: Plan) {
+fun PlanItem(plan: Plan, onClick: (Plan) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable { onClick(plan) }
             .padding(4.dp)
     ) {
         Column {
@@ -114,10 +120,10 @@ fun PlanItem(plan: Plan) {
 }
 
 @Composable
-fun PlanLazyColumn(planList: List<Plan>) {
+fun PlanLazyColumn(planList: List<Plan>, onClick: (Plan) -> Unit) {
     LazyColumn {
         itemsIndexed(items = planList) { index, item ->
-            PlanItem(plan = item)
+            PlanItem(plan = item, onClick = onClick)
         }
     }
 }
@@ -140,4 +146,9 @@ private fun filterPlan(planList: List<Plan>, year: String, borough: String): Lis
     } else {
         planList
     }
+}
+
+private fun planItemClickEvent(navController: NavController, plan: Plan) {
+    val planToJson = Gson().toJson(plan)
+    navController.navigate(RoutName.PLAN_DETAIL.replace(oldValue = "{${RoutName.PLAN_DETAIL_ARGUMENT}}", newValue = planToJson))
 }

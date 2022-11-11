@@ -15,9 +15,12 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.dialog
 import androidx.navigation.compose.rememberNavController
 import com.example.stationareayouthhousing.RoutName
+import com.example.stationareayouthhousing.model.dto.Plan
 import com.example.stationareayouthhousing.viewmodel.MainActivityViewModel
+import com.google.gson.GsonBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,6 +49,12 @@ class MainActivity : AppCompatActivity() {
                                 innerPadding = innerPadding,
                                 planListLiveData = mainActivityViewModel.planListLiveData
                             )
+                        }
+
+                        dialog(RoutName.PLAN_DETAIL) {
+                            val planJson = it.arguments?.getString(RoutName.PLAN_DETAIL_ARGUMENT)
+                            val jsonToPlan = GsonBuilder().setLenient().create().fromJson(planJson, Plan::class.java)
+                            PlanDetail(innerPadding = innerPadding, plan = jsonToPlan)
                         }
 
                         composable(RoutName.NOTICE) {
