@@ -1,9 +1,9 @@
-package com.example.stationareayouthhousing.model
+package com.kyg.stationareayouthhousing.model
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.stationareayouthhousing.model.dto.Plan
+import com.kyg.stationareayouthhousing.model.dto.Plan
 
 @Database(entities = [Plan::class], version = 1)
 @TypeConverters(MyTypeConverter::class)

@@ -1,13 +1,13 @@
-package com.example.stationareayouthhousing.viewmodel
+package com.kyg.stationareayouthhousing.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.stationareayouthhousing.model.Repository
-import com.example.stationareayouthhousing.model.dto.Address
-import com.example.stationareayouthhousing.model.dto.Plan
-import com.example.stationareayouthhousing.model.dto.Supply
+import com.kyg.stationareayouthhousing.model.Repository
+import com.kyg.stationareayouthhousing.model.dto.Address
+import com.kyg.stationareayouthhousing.model.dto.Plan
+import com.kyg.stationareayouthhousing.model.dto.Supply
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

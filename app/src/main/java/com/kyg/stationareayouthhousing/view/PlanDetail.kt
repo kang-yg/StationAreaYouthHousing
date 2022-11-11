@@ -1,4 +1,4 @@
-package com.example.stationareayouthhousing.view
+package com.kyg.stationareayouthhousing.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,8 +15,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.stationareayouthhousing.R
-import com.example.stationareayouthhousing.model.dto.Plan
+import com.kyg.stationareayouthhousing.R
+import com.kyg.stationareayouthhousing.model.dto.Plan
 
 @Composable
 fun PlanDetail(innerPadding: PaddingValues, plan: Plan?) {
@@ -27,7 +27,7 @@ fun PlanDetail(innerPadding: PaddingValues, plan: Plan?) {
                 Text(text = stringResource(id = R.string.plan_detail))
             }
             Column {
-                
+
             }
         }
     }

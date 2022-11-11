@@ -1,4 +1,4 @@
-package com.example.stationareayouthhousing.model.dto
+package com.kyg.stationareayouthhousing.model.dto
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

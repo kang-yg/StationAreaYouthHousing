@@ -1,4 +1,4 @@
-package com.example.stationareayouthhousing.model.dto
+package com.kyg.stationareayouthhousing.model.dto
 
 data class Address(
     val borough: String,

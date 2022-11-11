@@ -1,8 +1,8 @@
-package com.example.stationareayouthhousing.model
+package com.kyg.stationareayouthhousing.model
 
 import androidx.room.TypeConverter
-import com.example.stationareayouthhousing.model.dto.Address
-import com.example.stationareayouthhousing.model.dto.Supply
+import com.kyg.stationareayouthhousing.model.dto.Address
+import com.kyg.stationareayouthhousing.model.dto.Supply
 import com.google.gson.Gson
 
 class MyTypeConverter {

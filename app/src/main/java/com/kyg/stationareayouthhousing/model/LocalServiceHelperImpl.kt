@@ -1,6 +1,6 @@
-package com.example.stationareayouthhousing.model
+package com.kyg.stationareayouthhousing.model
 
-import com.example.stationareayouthhousing.model.dto.Plan
+import com.kyg.stationareayouthhousing.model.dto.Plan
 import javax.inject.Inject
 
 class LocalServiceHelperImpl @Inject constructor(private val appDataBase: AppDataBase) : LocalServiceHelper {

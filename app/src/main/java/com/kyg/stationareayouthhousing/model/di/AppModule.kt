@@ -1,10 +1,10 @@
-package com.example.stationareayouthhousing.model.di
+package com.kyg.stationareayouthhousing.model.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.stationareayouthhousing.model.AppDataBase
-import com.example.stationareayouthhousing.model.LocalServiceHelper
-import com.example.stationareayouthhousing.model.LocalServiceHelperImpl
+import com.kyg.stationareayouthhousing.model.AppDataBase
+import com.kyg.stationareayouthhousing.model.LocalServiceHelper
+import com.kyg.stationareayouthhousing.model.LocalServiceHelperImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

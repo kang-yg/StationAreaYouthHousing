@@ -1,4 +1,4 @@
-package com.example.stationareayouthhousing.view
+package com.kyg.stationareayouthhousing.view
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -17,9 +17,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
 import androidx.navigation.compose.rememberNavController
-import com.example.stationareayouthhousing.RoutName
-import com.example.stationareayouthhousing.model.dto.Plan
-import com.example.stationareayouthhousing.viewmodel.MainActivityViewModel
+import com.kyg.stationareayouthhousing.RoutName
+import com.kyg.stationareayouthhousing.model.dto.Plan
+import com.kyg.stationareayouthhousing.viewmodel.MainActivityViewModel
 import com.google.gson.GsonBuilder
 import dagger.hilt.android.AndroidEntryPoint
 

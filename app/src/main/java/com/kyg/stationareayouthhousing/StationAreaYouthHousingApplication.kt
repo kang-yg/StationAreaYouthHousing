@@ -1,4 +1,4 @@
-package com.example.stationareayouthhousing
+package com.kyg.stationareayouthhousing
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

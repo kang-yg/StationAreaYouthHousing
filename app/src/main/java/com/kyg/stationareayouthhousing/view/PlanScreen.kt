@@ -1,4 +1,4 @@
-package com.example.stationareayouthhousing.view
+package com.kyg.stationareayouthhousing.view
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -20,10 +20,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
-import com.example.stationareayouthhousing.R
-import com.example.stationareayouthhousing.RoutName
-import com.example.stationareayouthhousing.model.dto.Plan
+import com.kyg.stationareayouthhousing.RoutName
+import com.kyg.stationareayouthhousing.model.dto.Plan
 import com.google.gson.Gson
+import com.kyg.stationareayouthhousing.R
 
 @Composable
 fun PlanScreen(navController: NavController, innerPadding: PaddingValues, planListLiveData: LiveData<List<Plan>>) {
