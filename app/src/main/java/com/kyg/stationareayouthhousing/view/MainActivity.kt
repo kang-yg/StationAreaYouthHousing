@@ -12,12 +12,15 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.remember
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
 import androidx.navigation.compose.rememberNavController
 import com.google.gson.GsonBuilder
+import com.kyg.stationareayouthhousing.Constants
+import com.kyg.stationareayouthhousing.R
 import com.kyg.stationareayouthhousing.RoutName
 import com.kyg.stationareayouthhousing.model.dto.Plan
 import com.kyg.stationareayouthhousing.viewmodel.MainActivityViewModel
@@ -56,8 +59,17 @@ class MainActivity : AppCompatActivity() {
                         dialog(RoutName.PLAN_DETAIL) {
                             val planJson = it.arguments?.getString(RoutName.PLAN_DETAIL_ARGUMENT_PLAN)
                             val jsonToPlan = GsonBuilder().setLenient().create().fromJson(planJson, Plan::class.java)
-                            mainActivityViewModel.getGeocodingAddress(jsonToPlan.address)
-                            PlanDetail(plan = jsonToPlan, snackbarHostState = snackbarHostState, geocodingLiveData = mainActivityViewModel.geocodingLiveData)
+                            if (isNetworkConnected()) {
+                                mainActivityViewModel.getGeocodingAddress(jsonToPlan.address)
+                            } else {
+                                Constants.showSnackBar(snackbarHostState = snackbarHostState, message = stringResource(id = R.string.no_network))
+                            }
+                            PlanDetail(
+                                plan = jsonToPlan,
+                                navController = navController,
+                                snackbarHostState = snackbarHostState,
+                                geocodingLiveData = mainActivityViewModel.geocodingLiveData
+                            )
                         }
 
                         composable(RoutName.NOTICE) {
