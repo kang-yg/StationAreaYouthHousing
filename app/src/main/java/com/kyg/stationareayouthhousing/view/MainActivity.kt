@@ -54,9 +54,10 @@ class MainActivity : AppCompatActivity() {
                         }
 
                         dialog(RoutName.PLAN_DETAIL) {
-                            val planJson = it.arguments?.getString(RoutName.PLAN_DETAIL_ARGUMENT)
+                            val planJson = it.arguments?.getString(RoutName.PLAN_DETAIL_ARGUMENT_PLAN)
                             val jsonToPlan = GsonBuilder().setLenient().create().fromJson(planJson, Plan::class.java)
-                            PlanDetail(innerPadding = innerPadding, plan = jsonToPlan)
+                            mainActivityViewModel.getGeocodingAddress(jsonToPlan.address)
+                            PlanDetail(plan = jsonToPlan, snackbarHostState = snackbarHostState, geocodingLiveData = mainActivityViewModel.geocodingLiveData)
                         }
 
                         composable(RoutName.NOTICE) {

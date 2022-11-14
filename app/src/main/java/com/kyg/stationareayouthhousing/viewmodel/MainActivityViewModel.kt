@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.studyandroid.model.Resource
+import com.kyg.stationareayouthhousing.Constants.concatAddress
 import com.kyg.stationareayouthhousing.model.Repository
 import com.kyg.stationareayouthhousing.model.dto.Address
+import com.kyg.stationareayouthhousing.model.dto.Geocoding
 import com.kyg.stationareayouthhousing.model.dto.Plan
 import com.kyg.stationareayouthhousing.model.dto.Supply
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,8 +21,11 @@ import javax.inject.Inject
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
     private val _planListMutableLiveData = MutableLiveData<List<Plan>>()
+    private val _geocodingMutableLiveData = MutableLiveData<Resource<Geocoding>>()
     val planListLiveData: LiveData<List<Plan>>
         get() = _planListMutableLiveData
+    val geocodingLiveData: LiveData<Resource<Geocoding>>
+        get() = _geocodingMutableLiveData
 
     fun createAndReadPlan(isNetworkConnected: Boolean) {
         viewModelScope.launch {
@@ -36,6 +42,20 @@ class MainActivityViewModel @Inject constructor(private val repository: Reposito
             }
         }
     }
+
+    fun getGeocodingAddress(address: Address) =
+        viewModelScope.launch {
+            CoroutineScope(Dispatchers.IO).launch {
+                _geocodingMutableLiveData.postValue(Resource.loading(null))
+                repository.getGeocoding(address.concatAddress()).let {
+                    if (it.isSuccessful)
+                        _geocodingMutableLiveData.postValue(Resource.success(it.body()))
+                    else
+                        _geocodingMutableLiveData.postValue(Resource.error(it.errorBody().toString(), null))
+                }
+            }
+        }
+
 
     private fun crawlingPlan() {
         val url = "https://soco.seoul.go.kr/youth/main/contents.do?menuNo=400014"

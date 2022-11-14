@@ -20,10 +20,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
-import com.kyg.stationareayouthhousing.RoutName
-import com.kyg.stationareayouthhousing.model.dto.Plan
 import com.google.gson.Gson
 import com.kyg.stationareayouthhousing.R
+import com.kyg.stationareayouthhousing.RoutName
+import com.kyg.stationareayouthhousing.model.dto.Plan
 
 @Composable
 fun PlanScreen(navController: NavController, innerPadding: PaddingValues, planListLiveData: LiveData<List<Plan>>) {
@@ -150,5 +150,5 @@ private fun filterPlan(planList: List<Plan>, year: String, borough: String): Lis
 
 private fun planItemClickEvent(navController: NavController, plan: Plan) {
     val planToJson = Gson().toJson(plan)
-    navController.navigate(RoutName.PLAN_DETAIL.replace(oldValue = "{${RoutName.PLAN_DETAIL_ARGUMENT}}", newValue = planToJson))
+    navController.navigate(RoutName.PLAN_DETAIL.replace(oldValue = "{${RoutName.PLAN_DETAIL_ARGUMENT_PLAN}}", newValue = planToJson))
 }

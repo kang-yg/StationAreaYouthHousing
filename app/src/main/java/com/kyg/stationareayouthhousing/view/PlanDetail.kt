@@ -2,32 +2,68 @@ package com.kyg.stationareayouthhousing.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.LiveData
+import com.example.studyandroid.model.Resource
+import com.example.studyandroid.model.Status
+import com.kyg.stationareayouthhousing.Constants.concatAddress
 import com.kyg.stationareayouthhousing.R
+import com.kyg.stationareayouthhousing.model.dto.Geocoding
 import com.kyg.stationareayouthhousing.model.dto.Plan
-import com.naver.maps.map.compose.ExperimentalNaverMapApi
-import com.naver.maps.map.compose.NaverMap
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraPosition
+import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.compose.*
 
 @Composable
 @ExperimentalMaterial3Api
 @ExperimentalNaverMapApi
-fun PlanDetail(innerPadding: PaddingValues, plan: Plan?) {
-    var searchKeyWord by rememberSaveable { mutableStateOf("") }
+fun PlanDetail(plan: Plan?, snackbarHostState: SnackbarHostState, geocodingLiveData: LiveData<Resource<Geocoding>>) {
+    var targetPlace = LatLng(37.5788408, 126.9770162) // 경복궁
+    val geocodingLiveDataState by geocodingLiveData.observeAsState()
+    val cameraPositionState = rememberCameraPositionState { position = CameraPosition(targetPlace, 15.0) }
+
+    if (geocodingLiveDataState != null) {
+        with(geocodingLiveDataState) {
+            when (this!!.status) {
+                Status.SUCCESS -> {
+                    this.data?.let {
+                        targetPlace = LatLng(it.geocodingAddress[0].y, it.geocodingAddress[0].x)
+                        cameraPositionState.move(CameraUpdate.scrollTo(targetPlace))
+                    }
+                }
+
+                Status.LOADING -> {
+                    LaunchedEffect(key1 = geocodingLiveDataState, block = {
+                        snackbarHostState.showSnackbar("로딩이야!!!")
+                    })
+                }
+
+                Status.ERROR -> {
+                    LaunchedEffect(key1 = geocodingLiveDataState, block = {
+                        snackbarHostState.showSnackbar("에러야!!!")
+                    })
+                }
+            }
+        }
+    }
 
     Box(modifier = Modifier.background(color = Color.White, shape = RoundedCornerShape(4.dp))) {
         Column {
@@ -36,14 +72,17 @@ fun PlanDetail(innerPadding: PaddingValues, plan: Plan?) {
                 Text(text = stringResource(id = R.string.plan_detail))
             }
             Column {
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(),
-                    value = searchKeyWord,
-                    onValueChange = { searchKeyWord = it },
-                    label = { Text(text = stringResource(id = R.string.plan_search)) })
-                NaverMap(
-                    modifier = Modifier.fillMaxSize()
-                )
+                plan?.let { plan ->
+                    Text(text = stringResource(id = R.string.plan_detail_address, plan.address.concatAddress()))
+                    NaverMap(
+                        modifier = Modifier.size(300.dp, 400.dp),
+                        cameraPositionState = cameraPositionState
+                    ) {
+                        Marker(
+                            state = MarkerState(position = targetPlace),
+                        )
+                    }
+                }
             }
         }
     }
