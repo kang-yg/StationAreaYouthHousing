@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">StationAreaYouthHousing</string>
 
+    <string name="no_network">No internet connection</string>
+
     <string name="go_plan_screen">Go to Plan</string>
     <string name="go_notice_screen">Go to notice</string>
     <string name="go_supportPolicy_screen">Go to support policy</string>
@@ -14,4 +16,7 @@
     <string name="plan_filter">Filter: </string>
     <string name="plan_detail">Plan Detail</string>
     <string name="plan_detail_address">주소: %s</string>
+    <string name="plan_detail_loading">로딩중...</string>
+    <string name="plan_detail_error">로딩 실패</string>
+    <string name="plan_detail_success">로딩 성공</string>
 </resources>
