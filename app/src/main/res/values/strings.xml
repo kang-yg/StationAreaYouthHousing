@@ -11,6 +11,7 @@
     <string name="schedule_public">공공</string>
     <string name="schedule_private">민간</string>
     <string name="schedule_move_in">입주(예정일)</string>
+    <string name="schedule_empty">공급현황 및 계획 없음</string>
 
     <string name="address">%s %s %s</string>
     <string name="plan_filter">Filter: </string>

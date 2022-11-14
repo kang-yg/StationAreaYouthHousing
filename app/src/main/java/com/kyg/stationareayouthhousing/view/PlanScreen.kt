@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
@@ -34,7 +35,7 @@ fun PlanScreen(navController: NavController, innerPadding: PaddingValues, planLi
         Column {
             planListLivaDataState?.let {
                 if (it.isEmpty()) {
-                    // TODO Show empty screen
+                    Text(text = stringResource(id = R.string.schedule_empty), fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
                 } else {
                     Row {
                         var selectYear by rememberSaveable { mutableStateOf("") }
@@ -51,7 +52,7 @@ fun PlanScreen(navController: NavController, innerPadding: PaddingValues, planLi
                             planListForFilter = filterPlan(it, if (selectYear != "ALL") selectYear else "", if (selectBorough != "ALL") selectBorough else "")
                         }
                     }
-                    if (planListForFilter == null)
+                    if (planListForFilter == null || planListForFilter!!.isEmpty())
                         PlanLazyColumn(planList = it, onClick = { plan -> planItemClickEvent(navController, plan) })
                     else
                         PlanLazyColumn(planList = planListForFilter!!, onClick = { plan -> planItemClickEvent(navController, plan) })
