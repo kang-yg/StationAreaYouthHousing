@@ -7,7 +7,10 @@ class Repository @Inject constructor(
     private val localServiceHelper: LocalServiceHelper, private val remoteServiceHelper: RemoteServiceHelper
 ) {
     fun getAllPlan() = localServiceHelper.getAllPlan()
+
     fun insertPlan(plan: Plan) = localServiceHelper.insertPlan(plan)
+
+    fun deleteAllPlan() = localServiceHelper.deleteAllPlan()
 
     suspend fun getGeocoding(addressStr: String) = remoteServiceHelper.getGeocoding(addressStr)
 }

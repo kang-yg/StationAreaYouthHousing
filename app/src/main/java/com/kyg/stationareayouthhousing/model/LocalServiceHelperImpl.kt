@@ -7,4 +7,6 @@ class LocalServiceHelperImpl @Inject constructor(private val appDataBase: AppDat
     override fun getAllPlan(): List<Plan> = appDataBase.localService().getAllPlan()
 
     override fun insertPlan(plan: Plan) = appDataBase.localService().insertPlan(plan)
+
+    override fun deleteAllPlan() = appDataBase.localService().deleteAllPlan()
 }

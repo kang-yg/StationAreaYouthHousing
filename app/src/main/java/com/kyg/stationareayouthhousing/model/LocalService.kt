@@ -1,9 +1,6 @@
 package com.kyg.stationareayouthhousing.model
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.kyg.stationareayouthhousing.model.dto.Plan
 
 @Dao
@@ -13,4 +10,7 @@ interface LocalService {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPlan(plan: Plan)
+
+    @Query("DELETE FROM `Plan`")
+    fun deleteAllPlan()
 }

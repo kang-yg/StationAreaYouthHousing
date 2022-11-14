@@ -32,6 +32,10 @@ class MainActivityViewModel @Inject constructor(private val repository: Reposito
             CoroutineScope(Dispatchers.IO).launch {
                 if (isNetworkConnected) {
                     launch {
+                        deleteAllPlan()
+                    }.join()
+
+                    launch {
                         crawlingPlan()
                     }.join()
                 }
@@ -79,4 +83,6 @@ class MainActivityViewModel @Inject constructor(private val repository: Reposito
     private fun getAllPlan() {
         _planListMutableLiveData.postValue(repository.getAllPlan())
     }
+
+    private fun deleteAllPlan() = repository.deleteAllPlan()
 }
