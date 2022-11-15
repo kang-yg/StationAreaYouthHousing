@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -40,7 +41,7 @@ fun PlanScreen(navController: NavController, innerPadding: PaddingValues, planLi
                     Row {
                         var selectYear by rememberSaveable { mutableStateOf("") }
                         var selectBorough by rememberSaveable { mutableStateOf("") }
-                        Text(text = stringResource(id = R.string.plan_filter))
+                        Text(text = stringResource(id = R.string.plan_filter), fontWeight = FontWeight.Bold)
                         Box(modifier = Modifier.padding(0.dp, 0.dp, 4.dp, 0.dp))
                         DropdownFilter(getSpinnerYear(it)) { year ->
                             selectYear = year
@@ -67,11 +68,14 @@ fun DropdownFilter(items: List<String>, selectItem: (String) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
     var selectedIndex by rememberSaveable { mutableStateOf(0) }
     Box(
-        modifier = Modifier.border(width = 1.dp, color = Color.Black, shape = RectangleShape)
+        modifier = Modifier.border(width = 1.dp, color = Color.Black, shape = RectangleShape),
+        contentAlignment = Alignment.Center
     ) {
         Text(
             items[selectedIndex],
-            modifier = Modifier.clickable(onClick = { expanded = true })
+            modifier = Modifier.clickable(onClick = { expanded = true }),
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center
         )
         DropdownMenu(
             expanded = expanded,
@@ -100,6 +104,7 @@ fun PlanItem(plan: Plan, onClick: (Plan) -> Unit) {
         Column {
             Row {
                 Text(text = plan.station, fontWeight = FontWeight.Bold)
+                Box(modifier = Modifier.padding(0.dp, 0.dp, 4.dp, 0.dp))
                 Text(text = stringResource(id = R.string.address, plan.address.borough, plan.address.dong, plan.address.houseNumber))
             }
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
