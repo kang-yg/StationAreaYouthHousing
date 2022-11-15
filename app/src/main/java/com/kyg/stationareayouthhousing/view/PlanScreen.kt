@@ -53,7 +53,7 @@ fun PlanScreen(navController: NavController, innerPadding: PaddingValues, planLi
                             planListForFilter = filterPlan(it, if (selectYear != "ALL") selectYear else "", if (selectBorough != "ALL") selectBorough else "")
                         }
                     }
-                    if (planListForFilter == null || planListForFilter!!.isEmpty())
+                    if (planListForFilter == null)
                         PlanLazyColumn(planList = it, onClick = { plan -> planItemClickEvent(navController, plan) })
                     else
                         PlanLazyColumn(planList = planListForFilter!!, onClick = { plan -> planItemClickEvent(navController, plan) })
