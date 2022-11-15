@@ -1,5 +1,6 @@
 package com.kyg.stationareayouthhousing.view
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -7,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -24,11 +26,7 @@ fun HomeScreen(navController: NavController, innerPadding: PaddingValues) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-/*            AsyncImage(
-                model = "https://soco.seoul.go.kr/resources/youth/img/main/youth_logo_color.png",
-                contentDescription = null,
-                modifier = Modifier.size(300.dp)
-            )*/
+            Image(painter = painterResource(id = R.drawable.youth_logo_color), contentDescription = null, modifier = Modifier.size(300.dp))
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(0.dp),
