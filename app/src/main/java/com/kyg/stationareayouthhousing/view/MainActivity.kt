@@ -73,11 +73,11 @@ class MainActivity : AppCompatActivity() {
                         }
 
                         composable(RoutName.NOTICE) {
-                            NoticeScreen(navController = navController, innerPadding = innerPadding)
+                            NoticeScreen(innerPadding = innerPadding)
                         }
 
                         composable(RoutName.SUPPORT_POLICY) {
-                            SupportPolicyScreen(navController = navController, innerPadding = innerPadding)
+                            SupportPolicyScreen(innerPadding = innerPadding)
                         }
                     }
                 }
