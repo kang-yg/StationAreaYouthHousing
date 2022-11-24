@@ -1,9 +1,12 @@
 package com.kyg.stationareayouthhousing.model.dto
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
 @Entity
+@Parcelize
 data class Plan(
     val year: String,
     @PrimaryKey val serialNumber: Int,
@@ -13,4 +16,4 @@ data class Plan(
     val publicDueDate: String,
     val privateDueDate: String,
     val expectedMoveInDate: String
-)
+) : Parcelable
