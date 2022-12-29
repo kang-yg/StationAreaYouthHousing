@@ -19,6 +19,18 @@ object Constants {
         this@apply.append(houseNumber)
     }.toString()
 
+    fun String.splitStringToAddress(): Address {
+        var borough: String
+        var dong: String
+        var houseNumber: String
+        split(" ").also {
+            borough = it[0]
+            dong = it[1]
+            houseNumber = it[2]
+        }
+        return Address(borough, dong, houseNumber)
+    }
+
     @Composable
     fun showSnackBar(snackbarHostState: SnackbarHostState, message: String) {
         LaunchedEffect(key1 = this, block = {

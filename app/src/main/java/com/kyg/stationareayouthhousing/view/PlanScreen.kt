@@ -103,6 +103,9 @@ fun PlanItem(plan: Plan, onClick: (Plan) -> Unit) {
     ) {
         Column {
             Row {
+                Text(text = plan.complexName, fontWeight = FontWeight.Bold)
+            }
+            Row {
                 Text(text = plan.station, fontWeight = FontWeight.Bold)
                 Box(modifier = Modifier.padding(0.dp, 0.dp, 4.dp, 0.dp))
                 Text(text = stringResource(id = R.string.address, plan.address.borough, plan.address.dong, plan.address.houseNumber))
@@ -115,10 +118,6 @@ fun PlanItem(plan: Plan, onClick: (Plan) -> Unit) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(text = stringResource(id = R.string.schedule_private))
                     Text(text = plan.privateDueDate)
-                }
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(text = stringResource(id = R.string.schedule_move_in))
-                    Text(text = plan.expectedMoveInDate)
                 }
             }
         }

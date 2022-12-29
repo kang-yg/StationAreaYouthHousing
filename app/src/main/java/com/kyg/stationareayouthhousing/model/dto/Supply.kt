@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Supply(
-    val total: Int,
-    val publicRental: Int,
-    val privateRental: Int
+    val total: String,
+    val publicRental: String,
+    val privateRental: String
 ) : Parcelable
