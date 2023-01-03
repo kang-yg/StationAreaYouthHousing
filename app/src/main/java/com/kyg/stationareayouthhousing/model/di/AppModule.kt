@@ -21,7 +21,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideAppDatabase(@ApplicationContext context: Context): AppDataBase =
-        Room.databaseBuilder(context, AppDataBase::class.java, "StationAreaYouthHousingDB").addMigrations(MIGRATION_1_2).build()
+        Room.databaseBuilder(context, AppDataBase::class.java, "StationAreaYouthHousingDB").addMigrations(MIGRATION_1_2, MIGRATION_2_3).build()
 
     @Singleton
     @Provides
