@@ -10,14 +10,14 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.kyg.stationareayouthhousing"
         minSdk 24
-        targetSdk 32
-        versionCode 7
-        versionName "1.0.6"
+        targetSdk 34
+        versionCode 8
+        versionName "1.0.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -43,6 +43,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.2.0-rc02"
     }
+    namespace 'com.kyg.stationareayouthhousing'
 }
 
 dependencies {
