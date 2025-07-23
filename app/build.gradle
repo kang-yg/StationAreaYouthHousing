@@ -10,7 +10,8 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    namespace 'com.kyg.stationareayouthhousing'
+
 
     defaultConfig {
         applicationId "com.kyg.stationareayouthhousing"
