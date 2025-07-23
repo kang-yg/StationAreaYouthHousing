@@ -5,13 +5,20 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -30,19 +37,23 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 @ExperimentalMaterial3Api
 @ExperimentalNaverMapApi
-class MainActivity : AppCompatActivity() {
+class
+MainActivity : AppCompatActivity() {
     private val mainActivityViewModel: MainActivityViewModel by viewModels()
     lateinit var navController: NavHostController
     lateinit var snackbarHostState: SnackbarHostState
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        enableEdgeToEdge()
+
         setContent {
             navController = rememberNavController()
             snackbarHostState = remember { SnackbarHostState() }
             Scaffold(
                 snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
                 content = { innerPadding ->
-                    NavHost(navController = navController, RoutName.HOME) {
+                    NavHost(navController = navController, RoutName.HOME, modifier = Modifier.fillMaxSize().padding(WindowInsets.systemBars.asPaddingValues())) {
                         composable(RoutName.HOME) {
                             HomeScreen(navController = navController, innerPadding = innerPadding)
                         }
@@ -80,7 +91,8 @@ class MainActivity : AppCompatActivity() {
                             SupportPolicyScreen(innerPadding = innerPadding)
                         }
                     }
-                }
+                },
+                contentWindowInsets = WindowInsets(0)
             )
         }
     }
